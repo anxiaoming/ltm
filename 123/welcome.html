@@ -1,0 +1,9 @@
+<!--<div class="jianjie">
+	<p ng-repeat="a in shuiguo">{{a.name}}</p>
+	<p ng-repeat="b in shuiguo">{{b.img}}</p>
+	<p ng-repeat="c in shuiguo">{{c.price}}</p>
+	<p ng-repeat="d in shuiguo">{{c.count}}</p>
+</div>-->
+<div class="CHXjianjie">
+	<p ng-repeat="a in shuiguo"><a href="#/detail/{{$index}}"><img src="{{a.img}}"/></a></p>
+</div>

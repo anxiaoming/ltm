@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular-1.5.8.js"></script>
+		<script src="js/angular-ui-router.js"></script>
+		<link rel="stylesheet" href="css/index.css"/>
+	</head>
+	<body>
+		<div class="CHXheader">
+			<div><</div>
+			<div><input type="text" placeholder="一站式购齐"/></div>
+			<div>搜索</div>
+		</div>
+		<div ui-view="content">
+			
+		</div>
+	</body>
+</html>
+<script>
+	var myApp=angular.module("myApp",["ui.router"]);
+	myApp.filter("chx",function(){
+	})
+    myApp.config(function($stateProvider,$urlRouterProvider){
+    	$urlRouterProvider.when("","/welcome");
+    	$stateProvider.state("welcome",{
+    		url:"/welcome",
+    		views:{
+    			content:{
+    				templateUrl:"welcome.html",
+    				controller:"welCtrl"
+    			}
+    		}
+    	})
+    	$stateProvider.state("detail",{
+    		url:"/detail/:id",
+    		views:{
+    			content:{
+    				templateUrl:"detail.html",
+    				controller:"detailCtrl"
+    			}
+    		}
+    	})
+    })
+    myApp.controller("welCtrl",function($scope,$http,$rootScope){
+		$http.get("data.json").success(function(e){
+			$scope.shuiguo=e;
+		})
+	})
+    myApp.controller("detailCtrl",function($scope,$stateParams,$http,$location){
+		var id=$stateParams.id;
+		console.log($stateParams)
+		$http.get("data.json").success(function(e){
+
+			$scope.item=e[id];
+		})
+		$scope.btn=function(){
+			$location.url("/welcome")
+		}
+		
+	})
+</script>
